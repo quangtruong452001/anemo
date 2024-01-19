@@ -26,7 +26,7 @@ async fn main() {
     let _network_2_handle = network_2.clone(); // keep network_2 alive until end of main
     let handle = tokio::spawn(async move {
         let (mut receiver, mut peers) = network_2.subscribe().unwrap();
-
+        // println!("{:#?}", peers);
         let peer_id = {
             if peers.is_empty() {
                 match receiver.recv().await.unwrap() {
@@ -55,7 +55,9 @@ async fn main() {
             });
         }
 
-        info!("{:#?}", futures::future::join_all(handles).await);
+        // info!("{:#?}", futures::future::join_all(handles).await);
+        // println!("{:#?}", futures::future::join_all(handles).await);
+
     });
 
     let peer = network_1.connect(network_2_addr).await.unwrap();
@@ -69,7 +71,9 @@ async fn main() {
         .await
         .unwrap();
 
-    info!("{:#?}", response);
+    // info!("{:#?}", response);
+    println!("{:#?}", response);
+
 
     handle.await.unwrap();
 }

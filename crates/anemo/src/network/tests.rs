@@ -409,7 +409,7 @@ async fn basic_connectivity_check() -> Result<()> {
     let mut subscriber_2 = network_2.subscribe()?.0;
 
     network_1.known_peers().insert(peer_info_2);
-
+    println!("{:#?}", subscriber_1.recv().await?);
     assert_eq!(NewPeer(peer_id_2), subscriber_1.recv().await?);
     assert_eq!(NewPeer(peer_id_1), subscriber_2.recv().await?);
 
